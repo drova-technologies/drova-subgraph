@@ -4,3 +4,12 @@ type ExampleEntity @entity {
   from: Bytes! # address
   to: Bytes! # address
 }
+
+type HoursRedeemedEntity @entity {
+  id: ID!
+  from: Bytes!
+  to: Bytes!
+  commissionReceiver: Bytes!
+  payment: BigInt!
+  commission: BigInt!
+}
