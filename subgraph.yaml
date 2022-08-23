@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LoyaltyProgramPaymentGateway
+    network: matic
+    source:
+      address: "0xe4E25fcA9b99Ac1358Cbf08c3a6c47f0D90d01CB"
+      abi: LoyaltyProgramPaymentGateway
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - HoursRedeemed
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: LoyaltyProgramPaymentGateway
+          file: ./abis/LoyaltyProgramPaymentGateway.json
+      eventHandlers:
+        - event: HoursRedeemed(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleHoursRedeemed
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+      file: ./src/mapping.ts
